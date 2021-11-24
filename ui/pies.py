@@ -674,6 +674,11 @@ class PieSave(Menu):
         r.operator("wm.call_menu", text='', icon_value=get_icon('external_data')).name = "TOPBAR_MT_file_external_data"
         r.operator("machin3.purge_orphans", text="Purge")
 
+        row = column.row()
+        r = row.row(align=False)
+        r.operator("machin3.libraries_reload", text="Reload Libraries", icon_value=get_icon('revert'))
+
+        
         # append world and materials
 
         appendworldpath = get_prefs().appendworldpath

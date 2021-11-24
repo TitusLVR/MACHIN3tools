@@ -477,3 +477,23 @@ class Clean(bpy.types.Operator):
             bpy.ops.view3d.localview(frame_selected=False)
 
         return {'FINISHED'}
+
+
+class LibrariesReload(bpy.types.Operator):
+    bl_idname = "machin3.libraries_reload"
+    bl_label = "Reload all linked libraries"
+    bl_description = "Reload all linked libraries"
+    bl_options = {'REGISTER', 'UNDO'}
+
+    @classmethod
+    def poll(cls, context):
+        return bpy.data.libraries
+
+    def execute(self, context):
+        if bpy.data.libraries:
+            for lib in bpy.data.libraries:
+                lib.reload()
+                self.report({'INFO'}, 'Librarie "%s" reloaded' % (lib.name))
+        return {'FINISHED'}
+
+
